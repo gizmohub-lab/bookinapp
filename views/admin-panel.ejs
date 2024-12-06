@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+    }
+    .card h2 {
+      margin: 0;
+      color: #4CAF50;
+    }
+    .card p {
+      margin: 5px 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>The Booked Lists</h1>
+  <div class="container">
+    <% bookings.forEach(booking => { %>
+      <div class="card">
+        <h2><%= booking.day %></h2>
+        <p><strong>Name:</strong> <%= booking.name %></p>
+        <p><strong>Phone:</strong> <%= booking.phone %></p>
+        <p><strong>Start Time:</strong> <%= new Date(booking.startTime).toLocaleString() %></p>
+        <p><strong>End Time:</strong> <%= new Date(booking.endTime).toLocaleString() %></p>
+      </div>
+    <% }); %>
+  </div>
+  
+</body>
+</html>

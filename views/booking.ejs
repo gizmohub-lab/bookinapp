@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditorium Booking</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css" integrity="sha384-NvKbDTEnL+A8F/AA5Tc5kmMLSJHUO868P+lDtTpJIeQdGYaUIuLr4lVGOEA1OcMy" crossorigin="anonymous">
+  <style>
+    body {
+      font-family:'Poppins';
+      margin: 20px;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .form-container h2 {
+      margin-bottom: 20px;
+    }
+    .form-container label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    .form-container input, .form-container select, .form-container button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-container button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
+    .form-container button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Book Now!</h2>
+    <form action="/book" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+
+      <label for="day">Day:</label>
+      <select id="day" name="day" required>
+        <option value="Sunday">Sunday</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+      </select>
+
+      <label for="startTime">Start Time:</label>
+      <input type="text" id="startTime" name="startTime" placeholder="Pick a start time" required>
+
+      <label for="endTime">End Time:</label>
+      <input type="text" id="endTime" name="endTime" placeholder="Pick an end time" required>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    // Initialize Flatpickr for start and end time
+    const startPicker = flatpickr("#startTime", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+      minDate: "today", // Prevent selecting past dates
+      onChange: function(selectedDates, dateStr, instance) {
+        // Update the end time picker to prevent selecting a time before the start time
+        endPicker.set("minDate", dateStr);
+      }
+    });
+
+    const endPicker = flatpickr("#endTime", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+      minDate: "today"
+    });
+  </script>
+
+<script>
+    document.getElementById("bookingForm").addEventListener("submit", function (e) {
+      const day = document.getElementById("day").value;
+      const startDate = new Date(document.getElementById("startTime").value);
+  
+      const actualDay = startDate.toLocaleDateString("en-US", { weekday: "long" });
+  
+      if (actualDay.toLowerCase() !== day.toLowerCase()) {
+        e.preventDefault();
+        alert("Day and date do not match!");
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>
