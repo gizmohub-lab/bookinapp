@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const bookingRoutes = require('./routes/booking');
 const adminRoutes = require('./routes/admin');
 const path = require ('path');
-
+require('dotenv').config();
 // Initialize express app
 const app = express();
 
