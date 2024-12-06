@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bookingRoutes = require('./routes/booking');
 const adminRoutes = require('./routes/admin');
+const path = require ('path');
 
 // Initialize express app
 const app = express();
